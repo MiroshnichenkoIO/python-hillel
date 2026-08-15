@@ -12,6 +12,11 @@ __pycache__/
 .idea/
 .vscode/
 
+# Результати збирання PyInstaller (важкі, збираються командою заново)
+build/
+dist/
+*.spec
+
 # Кеші інструментів
 .pytest_cache/
 .mypy_cache/
