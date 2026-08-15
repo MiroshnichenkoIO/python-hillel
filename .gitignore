@@ -1,0 +1,22 @@
+# Віртуальні оточення (їх у git не зберігають — див. конспект уроку 1)
+.venv/
+venv/
+env/
+
+# Кеш і скомпільовані файли Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Службові папки редакторів
+.idea/
+.vscode/
+
+# Кеші інструментів
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Системні файли
+Thumbs.db
+.DS_Store
