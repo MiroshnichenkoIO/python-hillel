@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<title>Урок 2 — Git простими словами</title>
+<style>
+  @page { size: A4; margin: 18mm 16mm; }
+  * { box-sizing: border-box; }
+  body {
+    font-family: "Segoe UI", Verdana, Arial, sans-serif;
+    font-size: 12pt;
+    line-height: 1.55;
+    color: #1b1b1f;
+    margin: 0;
+  }
+  h1 {
+    font-size: 26pt;
+    margin: 0 0 4pt;
+    color: #14532d;
+  }
+  .sub { font-size: 12pt; color: #4b5563; margin: 0 0 18pt; }
+  h2 {
+    font-size: 17pt;
+    margin: 22pt 0 8pt;
+    padding-bottom: 4pt;
+    border-bottom: 2px solid #86efac;
+    color: #14532d;
+    page-break-after: avoid;
+  }
+  h3 { font-size: 13pt; margin: 14pt 0 6pt; color: #166534; page-break-after: avoid; }
+  p { margin: 6pt 0; }
+  ul, ol { margin: 6pt 0 6pt 18pt; padding: 0; }
+  li { margin: 3pt 0; }
+  code {
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 10.5pt;
+    background: #f1f5f9;
+    padding: 1pt 4pt;
+    border-radius: 3px;
+  }
+  pre {
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 10pt;
+    background: #0f172a;
+    color: #e2e8f0;
+    padding: 9pt 11pt;
+    border-radius: 6px;
+    line-height: 1.45;
+    white-space: pre-wrap;
+    page-break-inside: avoid;
+  }
+  pre .c { color: #86efac; }
+  .box {
+    background: #f0fdf4;
+    border-left: 4px solid #22c55e;
+    padding: 8pt 12pt;
+    margin: 10pt 0;
+    page-break-inside: avoid;
+  }
+  .warn { background: #fef2f2; border-left-color: #ef4444; }
+  .note { background: #eff6ff; border-left-color: #3b82f6; }
+  table { border-collapse: collapse; width: 100%; margin: 10pt 0; font-size: 11pt; page-break-inside: avoid; }
+  th, td { border: 1px solid #d1d5db; padding: 5pt 8pt; text-align: left; vertical-align: top; }
+  th { background: #dcfce7; }
+  .zones {
+    display: flex;
+    gap: 6pt;
+    margin: 12pt 0;
+    page-break-inside: avoid;
+  }
+  .zone {
+    flex: 1;
+    border: 2px solid #22c55e;
+    border-radius: 8px;
+    padding: 8pt;
+    font-size: 10.5pt;
+    text-align: center;
+  }
+  .zone b { display: block; font-size: 11.5pt; margin-bottom: 3pt; }
+  .zone .emoji { font-size: 20pt; display: block; }
+  .arrow { align-self: center; font-size: 16pt; color: #16a34a; }
+  .page-break { page-break-before: always; }
+  .why { font-style: italic; color: #4b5563; }
+  footer { margin-top: 20pt; font-size: 10pt; color: #6b7280; border-top: 1px solid #d1d5db; padding-top: 6pt; }
+</style>
+</head>
+<body>
+
+<h1>Git простими словами</h1>
+<p class="sub">Урок 2 — конспект для тих, хто бачить Git уперше</p>
+
+<h2>1. Уяви, що ти граєш у гру</h2>
+
+<p>Ти проходиш складний рівень. Перед боєм з босом ти <b>зберігаєшся</b>.
+Якщо бос переміг — не починаєш гру з початку, а завантажуєш збереження.</p>
+
+<p><b>Git — це збереження для коду.</b> Ти пишеш програму, зберігаєшся,
+пишеш далі. Зламав усе? Завантажуєш попереднє збереження, і код знову
+працює, як раніше.</p>
+
+<div class="box">
+<b>Збереження в Git називається «коміт» (commit).</b><br>
+Коміт — це фотографія всього проєкту в певний момент: усі файли, як вони
+виглядали, плюс твій підпис, дата і записка «що я тут зробив».
+</div>
+
+<p>Без Git люди робили так: <code>проєкт</code>, <code>проєкт_новий</code>,
+<code>проєкт_фінал</code>, <code>проєкт_фінал_2_ТОЧНО</code>. За тиждень уже
+ніхто не пам'ятає, де остання версія. З Git усе це — одна папка й акуратний
+список збережень.</p>
+
+<h2>2. Git, GitHub і GitLab — три різні речі</h2>
+
+<p>Це найчастіша плутанина на початку, тому розберемо одразу.</p>
+
+<table>
+<tr><th>Хто це</th><th>Простими словами</th><th>Де живе</th></tr>
+<tr><td><b>Git</b></td><td>програма, яка робить збереження коду</td><td>у тебе на комп'ютері</td></tr>
+<tr><td><b>GitHub</b></td><td>сайт, куди можна відправити копію своїх збережень</td><td>в інтернеті</td></tr>
+<tr><td><b>GitLab</b></td><td>такий самий сайт, тільки інша фірма (заснували українці)</td><td>в інтернеті або на своєму сервері</td></tr>
+</table>
+
+<div class="box note">
+<b>Аналогія:</b> Git — це <b>двигун</b>. GitHub — це <b>гараж</b>, де цей
+двигун стоїть і де збирається вся команда механіків.
+</div>
+
+<p>Головне: Git працює <b>без інтернету</b>. Ти можеш робити коміти в літаку.
+GitHub потрібен лише тоді, коли хочеш показати код іншим людям або мати
+копію «в хмарі», якщо з ноутбуком щось трапиться.</p>
+
+<h3>Звідки взявся Git</h3>
+<p>У 2005 році Лінус Торвальдс (той, хто створив Linux) розсердився, що
+програма для збереження версій стала платною, і написав свою — <b>за два
+тижні</b>. Сьогодні нею користується практично весь світ розробки.</p>
+
+<div class="page-break"></div>
+
+<h2>3. Три зони: найважливіша схема уроку</h2>
+
+<p>Файл на шляху до «збереження» проходить три місця. Уяви, що ти збираєш
+фотоальбом.</p>
+
+<div class="zones">
+  <div class="zone"><span class="emoji">📝</span><b>Робочий стіл</b>Working directory<br>тут ти малюєш і креслиш, фотки розкидані</div>
+  <div class="arrow">→</div>
+  <div class="zone"><span class="emoji">📋</span><b>Кошик відібраних</b>Staging area<br>сюди кладеш лише ті фото, що підуть в альбом</div>
+  <div class="arrow">→</div>
+  <div class="zone"><span class="emoji">📦</span><b>Альбом</b>Repository (.git)<br>сторінка вклеєна — це вже історія назавжди</div>
+</div>
+
+<p>А команди — це просто «перенеси з однієї зони в наступну»:</p>
+
+<pre>правлю файл  <span class="c">→</span>  git add  <span class="c">→</span>  git commit  <span class="c">→</span>  git push
+робочий стіл      кошик         альбом        GitHub</pre>
+
+<h3>Навіщо потрібен кошик (staging), чому не одразу в альбом?</h3>
+
+<p class="why">Бо ти рідко робиш одну справу за раз.</p>
+
+<p>Ти виправив помилку в калькуляторі <b>і</b> заодно змінив колір кнопки.
+Це дві різні історії. Через <code>git add</code> ти кладеш у коміт лише
+файли про калькулятор, зберігаєш його з підписом «виправив ділення»,
+а потім окремо зберігаєш кнопку. Через місяць буде зрозуміло, що коли робилось.</p>
+
+<h2>4. Перші п'ять команд, які роблять усе</h2>
+
+<pre>git status                  <span class="c"># що зараз відбувається?</span>
+git add main.py             <span class="c"># поклади файл у кошик</span>
+git commit -m "add main"    <span class="c"># вклей сторінку в альбом</span>
+git log --oneline           <span class="c"># покажи список збережень</span>
+git diff                    <span class="c"># що саме я змінив?</span></pre>
+
+<div class="box">
+<b>Найголовніша команда — <code>git status</code>.</b> Вона нічого не ламає,
+її можна писати хоч сто разів на день. Git сам пише, де ти є, що змінилось
+і що зробити далі. Не вгадуй — спитай <code>git status</code>.
+</div>
+
+<h3>Як виглядає перший день з Git</h3>
+
+<pre>mkdir my_project            <span class="c"># зробили папку</span>
+cd my_project               <span class="c"># зайшли в неї</span>
+git init                    <span class="c"># «Git, стеж за цією папкою»</span>
+
+echo "print('Hello Git!')" &gt; main.py
+
+git add main.py
+git commit -m "add main.py"
+git log --oneline           <span class="c"># є перше збереження!</span></pre>
+
+<p>Після <code>git init</code> у папці з'являється прихована тека
+<code>.git</code> — це і є той самий альбом. Усередині лежить уся історія.
+Руками там нічого не чіпаємо, а якщо видалити цю теку — історія зникне
+назавжди.</p>
+
+<div class="page-break"></div>
+
+<h2>5. Гілки — паралельні світи проєкту</h2>
+
+<p>Уяви книгу-квест: «якщо йдеш у ліс — сторінка 40, якщо в село — сторінка 60».
+Гілка (branch) — це саме такий поворот сюжету для коду.</p>
+
+<pre>main            A---B---C-------------F   <span class="c">← головна, завжди працює</span>
+                         \           /
+feature-login             D---E-----     <span class="c">← тут я роблю вхід у гру</span></pre>
+
+<p>Правило команди: <b>у <code>main</code> лежить те, що точно працює</b>.
+Усе нове й недороблене — в окремій гілці. Зламав щось у гілці? Головна версія
+навіть не помітила.</p>
+
+<pre>git checkout -b feature-login   <span class="c"># створити гілку і перейти в неї</span>
+git branch                      <span class="c"># де я? зірочка * біля поточної</span>
+
+<span class="c"># ... пишу код ...</span>
+git add .
+git commit -m "add login"
+
+git checkout main               <span class="c"># повернувся в головну</span>
+git merge feature-login        <span class="c"># влив свою роботу в головну</span></pre>
+
+<h2>6. GitHub: віддати код у хмару</h2>
+
+<p>Три слова, які треба знати:</p>
+
+<table>
+<tr><th>Слово</th><th>Що означає</th></tr>
+<tr><td><code>origin</code></td><td>прізвисько для адреси твого репозиторію на GitHub</td></tr>
+<tr><td><code>git push</code></td><td>«штовхнути» — відправити свої коміти в хмару</td></tr>
+<tr><td><code>git pull</code></td><td>«потягнути» — забрати те, що додали інші</td></tr>
+</table>
+
+<pre>git remote add origin git@github.com:username/my_project.git
+git push -u origin main        <span class="c"># перший раз — з -u</span>
+git push                       <span class="c"># далі просто так</span>
+git pull                       <span class="c"># забрати чужі зміни</span></pre>
+
+<div class="box note">
+<b>Головна звичка:</b> починай роботу з <code>git pull</code>, а закінчуй
+<code>git push</code>. Тоді ти завжди працюєш зі свіжою версією, і твоя
+робота не лежить лише на одному ноутбуці.
+</div>
+
+<h3>SSH-ключ — це твій підпис, а не пароль</h3>
+
+<p>Щоб GitHub впускав тебе без пароля, роблять пару ключів командою
+<code>ssh-keygen</code>. З'являються два файли:</p>
+
+<ul>
+  <li><code>id_rsa</code> — <b>приватний</b> ключ. Це як ключ від квартири:
+      нікому, ніколи, ні в яких чатах.</li>
+  <li><code>id_rsa.pub</code> — <b>публічний</b> ключ. Це як замок:
+      його спокійно віддаємо GitHub (Settings → SSH and GPG keys).</li>
+</ul>
+
+<p>GitHub чіпляє твій «замок» собі, і далі твій ключ його відкриває сам,
+без жодних паролів.</p>
+
+<div class="page-break"></div>
+
+<h2>7. Pull Request — «перевір, будь ласка, мою роботу»</h2>
+
+<p>У командах не заливають зміни в головну гілку напряму. Спочатку кажуть:
+«ось що я зробив, подивіться». Це і є <b>Pull Request</b> (на GitLab його
+називають <b>Merge Request</b>).</p>
+
+<ol>
+  <li>запушив свою гілку на GitHub;</li>
+  <li>натиснув <b>Compare &amp; pull request</b>;</li>
+  <li>написав, що змінив і як це перевірити;</li>
+  <li>додав рев'юера — людину, яка прочитає код;</li>
+  <li>вона коментує, ти виправляєш;</li>
+  <li>після схвалення тиснемо <b>Merge</b> — зміни в головній гілці.</li>
+</ol>
+
+<p class="why">Це не бюрократія: свіже око знаходить помилки, які автор
+перестає бачити після третьої години роботи.</p>
+
+<h2>8. Конфлікт — двоє писали в одному рядку</h2>
+
+<p>Ти змінив рядок 10, і колега змінив рядок 10. Git не вміє вибирати, чия
+версія краща, тому чесно показує обидві й просить розібратися:</p>
+
+<pre>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+print("Hello world")          <span class="c">← моя версія</span>
+=======
+print("Hello Git!")           <span class="c">← версія з іншої гілки</span>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; feature-branch</pre>
+
+<p>Що робимо: відкриваємо файл, залишаємо правильний рядок, видаляємо
+дивні значки <code>&lt;&lt;&lt;</code>, <code>===</code>, <code>&gt;&gt;&gt;</code>.
+Потім:</p>
+
+<pre>git add file.py
+git commit -m "resolve conflict"</pre>
+
+<div class="box warn">
+<b>Конфлікт — це не поломка.</b> Це нормальна робоча ситуація, вона буває
+в усіх. Git навіть підстрахує: <code>git merge --abort</code> скасує злиття
+й повернe все, як було до нього.
+</div>
+
+<h2>9. Кишеня на швидку руку: <code>git stash</code></h2>
+
+<p>Ти щось недороблене пишеш, і раптом треба терміново перейти в іншу гілку.
+Комітити напівроботу не хочеться. Складаємо в кишеню:</p>
+
+<pre>git stash          <span class="c"># відклав, робоча папка чиста</span>
+git stash list     <span class="c"># що в кишені лежить</span>
+git stash pop      <span class="c"># повернув назад</span></pre>
+
+<h2>10. Що робити, коли «я все зламав»</h2>
+
+<table>
+<tr><th>Ситуація</th><th>Команда</th></tr>
+<tr><td>наплутав у файлі, коміту ще не було</td><td><code>git restore file.py</code></td></tr>
+<tr><td>додав у кошик зайвий файл</td><td><code>git restore --staged file.py</code></td></tr>
+<tr><td>хочу скасувати вже зроблений коміт</td><td><code>git revert &lt;хеш&gt;</code></td></tr>
+<tr><td>хочу подивитись, як було раніше</td><td><code>git checkout &lt;хеш&gt;</code></td></tr>
+<tr><td>здається, я втратив свої коміти</td><td><code>git reflog</code></td></tr>
+</table>
+
+<div class="box">
+<b>Добра новина:</b> у Git майже неможливо втратити роботу назавжди.
+Якщо коміт колись існував, Git тримає його ще близько 30 днів — і
+<code>git reflog</code> покаже, куди повернутись.
+</div>
+
+<h2>Головне з уроку — п'ять рядків</h2>
+
+<ol>
+  <li><b>Коміт</b> — це збереження в грі. Робіть їх часто й з підписами по суті.</li>
+  <li><b>Три зони:</b> файл → <code>git add</code> → <code>git commit</code> → <code>git push</code>.</li>
+  <li><b>Git ≠ GitHub.</b> Git у тебе, GitHub — гараж у хмарі.</li>
+  <li><b>Гілка</b> — окремий світ для нової ідеї, щоб не зламати робочу версію.</li>
+  <li><b>Не знаєш, що робити — пиши <code>git status</code>.</b></li>
+</ol>
+
+<footer>
+Урок 2 · курс Python · повний конспект і всі команди — у файлах
+<code>01_teoriya.md</code>–<code>07_korysni_fishky.md</code> та <code>GIT_CHEATSHEET.md</code>
+</footer>
+
+</body>
+</html>
