@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}{{ product.title }}{% endblock %}
+
+{% block content %}
+    <h2>{{ product.title }}</h2>
+    <p><strong>{{ "%.2f"|format(product.price) }} грн</strong></p>
+
+    <form method="post" action="{{ url_for('make_order') }}">
+        <input type="hidden" name="product_id" value="{{ product.id }}">
+        <label for="customer">Ваше імʼя</label>
+        <input id="customer" name="customer" required>
+        <button>Замовити</button>
+    </form>
+
+    <p><a href="{{ url_for('catalog') }}">← до каталогу</a></p>
+{% endblock %}

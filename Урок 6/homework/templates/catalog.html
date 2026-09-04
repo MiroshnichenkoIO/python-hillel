@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Каталог{% endblock %}
+
+{% block content %}
+    <h2>Каталог</h2>
+
+    {% if message %}
+        <p>{{ message }}</p>
+    {% endif %}
+
+    <ul class="products">
+        {% for product in products %}
+            <li>
+                <a href="{{ url_for('product_page', product_id=product.id) }}">{{ product.title }}</a>
+                <span>{{ "%.2f"|format(product.price) }} грн</span>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

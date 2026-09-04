@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Замовлення{% endblock %}
+
+{% block content %}
+    <h2>Замовлення</h2>
+
+    {% if orders %}
+        <table>
+            <tr>
+                <th>Покупець</th>
+                <th>Товар</th>
+                <th>Ціна</th>
+            </tr>
+            {% for order in orders %}
+                <tr>
+                    <td>{{ order.customer }}</td>
+                    <td>{{ order.title }}</td>
+                    <td>{{ "%.2f"|format(order.price) }} грн</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>Замовлень поки немає.</p>
+    {% endif %}
+{% endblock %}
