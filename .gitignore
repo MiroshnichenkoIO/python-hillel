@@ -26,3 +26,6 @@ dist/
 Thumbs.db
 .DS_Store
 Урок 2/JPG/
+
+# База даних Django (створюється командою migrate)
+db.sqlite3
