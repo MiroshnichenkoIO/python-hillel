@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Книги</h1>
+
+<form method="get" class="row g-2 mb-4">
+    <div class="col-md-4">
+        <input class="form-control" name="q" placeholder="Назва книги" value="{{ request.GET.q }}">
+    </div>
+    <div class="col-md-3">
+        <select class="form-select" name="category">
+            <option value="">Усі категорії</option>
+            {% for category in categories %}
+                <option value="{{ category.slug }}" {% if request.GET.category == category.slug %}selected{% endif %}>{{ category.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="col-md-3 form-check pt-2">
+        <input class="form-check-input" type="checkbox" name="in_stock" value="1" id="in_stock" {% if request.GET.in_stock %}checked{% endif %}>
+        <label class="form-check-label" for="in_stock">Є в наявності</label>
+    </div>
+    <div class="col-md-2">
+        <button class="btn btn-primary" type="submit">Фільтр</button>
+    </div>
+</form>
+
+<table class="table table-hover">
+    <tr>
+        <th>Назва</th>
+        <th>Автор</th>
+        <th>Категорія</th>
+        <th>Ціна</th>
+        <th>Залишок</th>
+    </tr>
+    {% for book in book_list %}
+        <tr>
+            <td><a href="{% url 'shop:book_detail' book.pk %}">{{ book.title }}</a></td>
+            <td>{{ book.author }}</td>
+            <td>{{ book.category }}</td>
+            <td>{{ book.price }} грн</td>
+            <td>{{ book.stock }}</td>
+        </tr>
+    {% empty %}
+        <tr><td colspan="5">Книг немає</td></tr>
+    {% endfor %}
+</table>
+
+{% if is_paginated %}
+<ul class="pagination">
+    {% if page_obj.has_previous %}
+        <li class="page-item"><a class="page-link" href="{% querystring page=page_obj.previous_page_number %}">Назад</a></li>
+    {% endif %}
+    <li class="page-item disabled"><span class="page-link">{{ page_obj.number }} з {{ paginator.num_pages }}</span></li>
+    {% if page_obj.has_next %}
+        <li class="page-item"><a class="page-link" href="{% querystring page=page_obj.next_page_number %}">Далі</a></li>
+    {% endif %}
+</ul>
+{% endif %}
+{% endblock %}

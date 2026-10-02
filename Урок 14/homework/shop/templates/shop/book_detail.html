@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{{ book.title }}</h1>
+<p>Автор: {{ book.author }}</p>
+<p>Категорія: {{ book.category }}</p>
+<p>Ціна: {{ book.price }} грн</p>
+<p>Залишок: {{ book.stock }}</p>
+<p>{{ book.description }}</p>
+
+<a class="btn btn-warning" href="{% url 'shop:book_update' book.pk %}">Змінити</a>
+<a class="btn btn-danger" href="{% url 'shop:book_delete' book.pk %}">Видалити</a>
+<a class="btn btn-secondary" href="{% url 'shop:book_list' %}">Назад</a>
+{% endblock %}
