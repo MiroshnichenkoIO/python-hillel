@@ -1,0 +1,7 @@
+form p input,
+form p select,
+form p textarea {
+    display: block;
+    width: 100%;
+    max-width: 500px;
+}

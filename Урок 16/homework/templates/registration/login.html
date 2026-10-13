@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Вхід</h1>
+<form method="post" class="col-md-4">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="hidden" name="next" value="{{ next }}">
+    <button class="btn btn-primary" type="submit">Увійти</button>
+</form>
+<p class="mt-3">Немає акаунта? <a href="{% url 'users:register' %}">Зареєструватися</a></p>
+{% endblock %}
