@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Книжковий магазин{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1><a href="{% url 'shop:book_list' %}">Книжковий магазин</a></h1>
+        <nav>
+            {% if perms.shop.add_book %}
+                <a href="{% url 'shop:book_create' %}">Додати книгу</a>
+            {% endif %}
+            {% if user.is_authenticated %}
+                {{ user.username }}
+                <form method="post" action="{% url 'users:logout' %}">
+                    {% csrf_token %}
+                    <button type="submit">Вийти</button>
+                </form>
+            {% else %}
+                <a href="{% url 'users:login' %}">Увійти</a>
+                <a href="{% url 'users:register' %}">Реєстрація</a>
+            {% endif %}
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

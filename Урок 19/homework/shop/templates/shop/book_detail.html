@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}
+    {{ book.title }}
+{% endblock %}
+{% block content %}
+    <a href="{% url 'shop:book_list' %}">До каталогу</a>
+
+    <article class="card">
+        <h2>{{ book.title }}</h2>
+        <p>Автор: {{ book.author }}</p>
+        <p>Категорія: {{ book.category.name }}</p>
+        <p>Ціна: {{ book.price }} грн</p>
+        <p>Залишок: {{ book.stock }}</p>
+        <p>{{ book.description }}</p>
+    </article>
+
+    {% if perms.shop.change_book %}
+        <a href="{% url 'shop:book_update' book.pk %}">Змінити</a>
+    {% endif %}
+    {% if perms.shop.delete_book %}
+        <a href="{% url 'shop:book_delete' book.pk %}">Видалити</a>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}
+    Каталог книг
+{% endblock %}
+{% block content %}
+    <h2>Каталог книг</h2>
+
+    <form method="get">
+        <input type="text" name="q" placeholder="Пошук книги..." value="{{ request.GET.q }}">
+        <button type="submit">Знайти</button>
+    </form>
+    <p>Знайдено книг: {{ page_obj.paginator.count }}</p>
+
+    {% for book in page_obj %}
+        <article class="card">
+            <h3><a href="{% url 'shop:book_detail' book.pk %}">{{ book.title }}</a></h3>
+            <p>{{ book.author }} - {{ book.price }} грн</p>
+        </article>
+    {% empty %}
+        <p>Книг не знайдено</p>
+    {% endfor %}
+
+    <nav>
+        {% if page_obj.has_previous %}
+            <a href="{% querystring page=page_obj.previous_page_number %}">Попередня сторінка</a>
+        {% endif %}
+        Сторінка {{ page_obj.number }} з {{ page_obj.paginator.num_pages }}
+        {% if page_obj.has_next %}
+            <a href="{% querystring page=page_obj.next_page_number %}">Наступна сторінка</a>
+        {% endif %}
+    </nav>
+{% endblock %}

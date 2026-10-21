@@ -1,0 +1,175 @@
+[
+{
+  "model": "auth.group",
+  "fields": {
+    "name": "Менеджери",
+    "permissions": [
+      [
+        "add_book",
+        "shop",
+        "book"
+      ],
+      [
+        "change_book",
+        "shop",
+        "book"
+      ],
+      [
+        "delete_book",
+        "shop",
+        "book"
+      ]
+    ]
+  }
+},
+{
+  "model": "auth.group",
+  "fields": {
+    "name": "Покупці",
+    "permissions": []
+  }
+},
+{
+  "model": "shop.category",
+  "pk": 1,
+  "fields": {
+    "name": "Детектив",
+    "slug": "detektiv"
+  }
+},
+{
+  "model": "shop.category",
+  "pk": 2,
+  "fields": {
+    "name": "Фентезі",
+    "slug": "fentezi"
+  }
+},
+{
+  "model": "shop.book",
+  "pk": 1,
+  "fields": {
+    "title": "Вбивство у Східному експресі",
+    "author": "Агата Крісті",
+    "price": "500.00",
+    "description": "",
+    "stock": 3,
+    "created_at": "2026-10-21T09:48:37.354Z",
+    "category": 1
+  }
+},
+{
+  "model": "shop.book",
+  "pk": 2,
+  "fields": {
+    "title": "Смерть на Нілі",
+    "author": "Агата Крісті",
+    "price": "450.00",
+    "description": "",
+    "stock": 0,
+    "created_at": "2026-10-21T09:48:37.355Z",
+    "category": 1
+  }
+},
+{
+  "model": "shop.book",
+  "pk": 3,
+  "fields": {
+    "title": "І не лишилось жодного",
+    "author": "Агата Крісті",
+    "price": "350.00",
+    "description": "",
+    "stock": 7,
+    "created_at": "2026-10-21T09:48:37.355Z",
+    "category": 1
+  }
+},
+{
+  "model": "shop.book",
+  "pk": 4,
+  "fields": {
+    "title": "Володар перснів",
+    "author": "Джон Толкін",
+    "price": "700.00",
+    "description": "",
+    "stock": 2,
+    "created_at": "2026-10-21T09:48:37.356Z",
+    "category": 2
+  }
+},
+{
+  "model": "shop.book",
+  "pk": 5,
+  "fields": {
+    "title": "Хроніки Нарнії",
+    "author": "Клайв Льюїс",
+    "price": "600.00",
+    "description": "",
+    "stock": 0,
+    "created_at": "2026-10-21T09:48:37.356Z",
+    "category": 2
+  }
+},
+{
+  "model": "users.customuser",
+  "fields": {
+    "password": "pbkdf2_sha256$1500000$fbSK3GhLQ8GD3BTZdOwqms$W5kv2tdNDDaeoLQgVNs7c+KWjMLb8j9dpAl7mNcAzlI=",
+    "last_login": null,
+    "is_superuser": true,
+    "username": "admin",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2026-10-21T09:48:37.360Z",
+    "phone": "",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.customuser",
+  "fields": {
+    "password": "pbkdf2_sha256$1500000$5lCIdvWMKBvQdOUGE7lrN5$ldeRCj/E/G7OwA0DhUJ6qbZfe3n3MxwKwFF69yn7Nn0=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "manager",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-10-21T09:48:37.805Z",
+    "phone": "",
+    "groups": [
+      [
+        "Менеджери"
+      ]
+    ],
+    "user_permissions": []
+  }
+},
+{
+  "model": "users.customuser",
+  "fields": {
+    "password": "pbkdf2_sha256$1500000$ioxdIdfXtPnJzUXTc3H78e$1NO/5u/a2PVNvNLr8mn5nTvAa9eaT57MqUj3OgfKXR8=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "buyer",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-10-21T09:48:38.255Z",
+    "phone": "",
+    "groups": [
+      [
+        "Покупці"
+      ]
+    ],
+    "user_permissions": []
+  }
+}
+]
