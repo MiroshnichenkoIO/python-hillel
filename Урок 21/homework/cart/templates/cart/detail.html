@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}
+    Кошик
+{% endblock %}
+{% block content %}
+    <h2>Кошик</h2>
+
+    {% for item in cart %}
+        <article class="card">
+            <h3>{{ item.book.title }}</h3>
+            <p>{{ item.quantity }} шт. x {{ item.price }} грн = {{ item.total_price }} грн</p>
+            <form method="post" action="{% url 'cart:cart_remove' item.book.id %}">
+                {% csrf_token %}
+                <button type="submit">Прибрати</button>
+            </form>
+        </article>
+    {% empty %}
+        <p>Кошик порожній</p>
+    {% endfor %}
+
+    {% if cart|length > 0 %}
+        <p>Разом: {{ cart.get_total_price }} грн</p>
+        <form method="post" action="{% url 'cart:cart_clear' %}">
+            {% csrf_token %}
+            <button type="submit">Очистити кошик</button>
+        </form>
+        <a href="{% url 'orders:order_create' %}">Оформити замовлення</a>
+    {% endif %}
+    <a href="{% url 'shop:book_list' %}">До каталогу</a>
+{% endblock %}

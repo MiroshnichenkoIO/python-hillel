@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}
+    Оплату скасовано
+{% endblock %}
+{% block content %}
+    <h2>Оплату скасовано</h2>
+    <p>{{ order }} не оплачено.</p>
+    <a href="{% url 'orders:payment_process' order.id %}">Спробувати ще раз</a>
+{% endblock %}

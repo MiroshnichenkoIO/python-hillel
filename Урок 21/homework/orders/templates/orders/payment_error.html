@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}
+    Помилка оплати
+{% endblock %}
+{% block content %}
+    <h2>Помилка оплати</h2>
+    <p>{{ error }}</p>
+    <a href="{% url 'cart:cart_detail' %}">До кошика</a>
+{% endblock %}
