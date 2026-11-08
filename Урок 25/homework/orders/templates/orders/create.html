@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}
+    {% trans "Оформлення замовлення" %}
+{% endblock %}
+{% block content %}
+    <h2>{% trans "Оформлення замовлення" %}</h2>
+
+    {% for item in cart %}
+        <p>{{ item.book.title }} - {{ item.quantity }} {% trans "шт." %} - {{ item.total_price }} {% trans "грн" %}</p>
+    {% endfor %}
+    <p>{% trans "Разом" %}: {{ cart.get_total_price }} {% trans "грн" %}</p>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">{% trans "Замовити" %}</button>
+    </form>
+{% endblock %}

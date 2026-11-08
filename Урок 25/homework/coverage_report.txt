@@ -1,0 +1,49 @@
+pytest --cov=shop --cov=orders --cov=cart --cov=users
+58 passed
+
+Models:
+Name               Stmts   Miss  Cover   Missing
+------------------------------------------------
+orders/models.py      35      0   100%
+shop/models.py        26      0   100%
+users/models.py       10      0   100%
+------------------------------------------------
+TOTAL                 71      0   100%
+
+All:
+Name                                    Stmts   Miss  Cover   Missing
+---------------------------------------------------------------------
+cart/__init__.py                            0      0   100%
+cart/apps.py                                3      0   100%
+cart/cart.py                               45      1    98%   30
+cart/context_processors.py                  4      0   100%
+cart/forms.py                               6      0   100%
+cart/urls.py                                4      0   100%
+cart/views.py                              29      0   100%
+orders/__init__.py                          0      0   100%
+orders/admin.py                            12      0   100%
+orders/apps.py                              3      0   100%
+orders/forms.py                             8      0   100%
+orders/models.py                           35      0   100%
+orders/urls.py                              4      0   100%
+orders/utils.py                             7      0   100%
+orders/views.py                           102      4    96%   86-88, 123-124
+shop/__init__.py                            0      0   100%
+shop/admin.py                              15      0   100%
+shop/apps.py                                4      0   100%
+shop/management/__init__.py                 0      0   100%
+shop/management/commands/__init__.py        0      0   100%
+shop/management/commands/seed_shop.py      33     33     0%   1-73
+shop/middleware.py                         14      0   100%
+shop/models.py                             26      0   100%
+shop/urls.py                                4      0   100%
+shop/views.py                              61      5    92%   38, 66-67, 91-92
+users/__init__.py                           0      0   100%
+users/admin.py                              8      0   100%
+users/apps.py                               4      0   100%
+users/forms.py                              6      0   100%
+users/models.py                            10      0   100%
+users/urls.py                               5      0   100%
+users/views.py                             19      0   100%
+---------------------------------------------------------------------
+TOTAL                                     471     43    91%

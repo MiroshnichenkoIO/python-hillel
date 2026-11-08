@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}
+    {% trans "Каталог книг" %}
+{% endblock %}
+{% block content %}
+    <h2>{% trans "Каталог книг" %}</h2>
+
+    <form method="get">
+        <input type="text" name="q" placeholder="{% trans 'Пошук книги...' %}" value="{{ request.GET.q }}">
+        <button type="submit">{% trans "Знайти" %}</button>
+    </form>
+    <p>{% trans "Знайдено книг" %}: {{ page_obj.paginator.count }}</p>
+
+    {% for book in page_obj %}
+        <article class="card">
+            <h3><a href="{% url 'shop:book_detail' book.pk %}">{{ book.title }}</a></h3>
+            <p>{{ book.author }} - {{ book.price }} {% trans "грн" %}</p>
+        </article>
+    {% empty %}
+        <p>{% trans "Книг не знайдено" %}</p>
+    {% endfor %}
+
+    <nav>
+        {% if page_obj.has_previous %}
+            <a href="{% querystring page=page_obj.previous_page_number %}">{% trans "Попередня сторінка" %}</a>
+        {% endif %}
+        {% blocktrans with number=page_obj.number total=page_obj.paginator.num_pages %}Сторінка {{ number }} з {{ total }}{% endblocktrans %}
+        {% if page_obj.has_next %}
+            <a href="{% querystring page=page_obj.next_page_number %}">{% trans "Наступна сторінка" %}</a>
+        {% endif %}
+    </nav>
+{% endblock %}

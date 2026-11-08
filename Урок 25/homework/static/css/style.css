@@ -1,0 +1,18 @@
+body {
+    font-family: Arial, sans-serif;
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 0 16px;
+    background: #f5f7fa;
+    color: #202733;
+}
+
+nav form {
+    display: inline;
+}
+
+.card {
+    background: #fff;
+    padding: 12px 16px;
+    margin-bottom: 10px;
+}

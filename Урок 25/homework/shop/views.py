@@ -1,0 +1,144 @@
+import logging
+
+from django.contrib.auth.mixins import (
+    LoginRequiredMixin,
+    PermissionRequiredMixin,
+)
+from django.db.models import Avg, Count, QuerySet, Sum
+from django.http import HttpRequest, HttpResponse, JsonResponse
+from django.urls import reverse_lazy
+from django.utils.translation import gettext as _
+from django.views.generic import (
+    CreateView,
+    DeleteView,
+    DetailView,
+    ListView,
+    UpdateView,
+)
+
+from cart.forms import CartAddBookForm
+
+from .models import Book, Category
+
+logger = logging.getLogger("shop")
+
+
+class BookListView(ListView):
+    """Каталог книг з пошуком за назвою і пагінацією по 3."""
+
+    model = Book
+    paginate_by = 3
+
+    def get_queryset(self) -> QuerySet:
+        """Фільтрує книги за параметром ?q= без урахування регістру."""
+        books = Book.objects.order_by("title")
+
+        q = self.request.GET.get("q")
+        if q:
+            books = books.filter(title__icontains=q)
+
+        return books
+
+
+class BookDetailView(DetailView):
+    """Сторінка однієї книги з формою додавання в кошик."""
+
+    model = Book
+
+    def get_context_data(self, **kwargs) -> dict:
+        """Додає в контекст форму вибору кількості."""
+        context = super().get_context_data(**kwargs)
+        context["cart_form"] = CartAddBookForm()
+        return context
+
+
+class BookCreateView(
+    LoginRequiredMixin, PermissionRequiredMixin, CreateView
+):
+    """Створення книги, доступне з правом shop.add_book."""
+
+    model = Book
+    fields = ["title", "author", "category", "price", "stock", "description"]
+    permission_required = "shop.add_book"
+
+    def form_valid(self, form) -> HttpResponse:
+        """Пише в лог, хто додав книгу."""
+        logger.info("%s додав книгу %s", self.request.user, form.instance)
+        return super().form_valid(form)
+
+
+class BookUpdateView(
+    LoginRequiredMixin, PermissionRequiredMixin, UpdateView
+):
+    """Редагування книги, доступне з правом shop.change_book."""
+
+    model = Book
+    fields = ["title", "author", "category", "price", "stock", "description"]
+    permission_required = "shop.change_book"
+
+
+class BookDeleteView(
+    LoginRequiredMixin, PermissionRequiredMixin, DeleteView
+):
+    """Видалення книги, доступне з правом shop.delete_book."""
+
+    model = Book
+    success_url = reverse_lazy("shop:book_list")
+    permission_required = "shop.delete_book"
+
+    def form_valid(self, form) -> HttpResponse:
+        """Пише в лог, хто видалив книгу."""
+        logger.warning("%s видалив книгу %s", self.request.user, self.object)
+        return super().form_valid(form)
+
+
+async def book_list_api(request: HttpRequest) -> JsonResponse:
+    """Асинхронно повертає JSON зі списком книг і пошуком ?q=."""
+    books = Book.objects.order_by("title")
+    q = request.GET.get("q")
+    if q:
+        books = books.filter(title__icontains=q)
+    data = [
+        book
+        async for book in books.values(
+            "id", "title", "author", "price", "stock", "category__name"
+        )
+    ]
+    return JsonResponse({"count": len(data), "books": data})
+
+
+async def book_detail_api(request: HttpRequest, pk: int) -> JsonResponse:
+    """Асинхронно повертає JSON однієї книги або 404."""
+    try:
+        book = await Book.objects.select_related("category").aget(pk=pk)
+    except Book.DoesNotExist:
+        return JsonResponse({"error": _("Книгу не знайдено")}, status=404)
+    return JsonResponse({
+        "id": book.id,
+        "title": book.title,
+        "author": book.author,
+        "price": book.price,
+        "stock": book.stock,
+        "category": book.category.name,
+    })
+
+
+async def shop_stats_api(request: HttpRequest) -> JsonResponse:
+    """Асинхронно рахує кількість книг, середню ціну і залишок."""
+    books_count = await Book.objects.acount()
+    totals = await Book.objects.aaggregate(
+        avg_price=Avg("price"), total_stock=Sum("stock")
+    )
+    categories = [
+        category
+        async for category in Category.objects.annotate(
+            books_count=Count("books")
+        ).values("name", "books_count")
+    ]
+    return JsonResponse({
+        "title": _("Статистика магазину"),
+        "books_count": books_count,
+        "avg_price": totals["avg_price"],
+        "total_stock": totals["total_stock"] or 0,
+        "categories": categories,
+    })
