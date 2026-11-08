@@ -1,0 +1,48 @@
+{% load static i18n %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% trans "Книжковий магазин" %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1><a href="{% url 'shop:book_list' %}">{% trans "Книжковий магазин" %}</a></h1>
+        <nav>
+            <a href="{% url 'cart:cart_detail' %}">{% trans "Кошик" %} ({{ cart|length }})</a>
+            {% if perms.shop.add_book %}
+                <a href="{% url 'shop:book_create' %}">{% trans "Додати книгу" %}</a>
+            {% endif %}
+            {% if user.is_authenticated %}
+                {{ user.username }}
+                <form method="post" action="{% url 'users:logout' %}">
+                    {% csrf_token %}
+                    <button type="submit">{% trans "Вийти" %}</button>
+                </form>
+            {% else %}
+                <a href="{% url 'users:login' %}">{% trans "Увійти" %}</a>
+                <a href="{% url 'users:register' %}">{% trans "Реєстрація" %}</a>
+            {% endif %}
+            <form method="post" action="{% url 'set_language' %}">
+                {% csrf_token %}
+                <input type="hidden" name="next" value="{{ request.get_full_path }}">
+                <select name="language">
+                    {% get_available_languages as languages %}
+                    {% for code, name in languages %}
+                        <option value="{{ code }}" {% if code == LANGUAGE_CODE %}selected{% endif %}>{{ name }}</option>
+                    {% endfor %}
+                </select>
+                <button type="submit">{% trans "Змінити мову" %}</button>
+            </form>
+        </nav>
+    </header>
+
+    <main>
+        {% for message in messages %}
+            <p class="card">{{ message }}</p>
+        {% endfor %}
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

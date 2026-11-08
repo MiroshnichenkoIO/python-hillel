@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}
+    {% trans "Помилка оплати" %}
+{% endblock %}
+{% block content %}
+    <h2>{% trans "Помилка оплати" %}</h2>
+    <p>{{ error }}</p>
+    <a href="{% url 'cart:cart_detail' %}">{% trans "До кошика" %}</a>
+{% endblock %}

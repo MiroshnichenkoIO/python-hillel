@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block content %}
+    <h2>{% blocktrans with title=book.title %}Видалити {{ title }}?{% endblocktrans %}</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">{% trans "Так, видалити" %}</button>
+    </form>
+{% endblock %}

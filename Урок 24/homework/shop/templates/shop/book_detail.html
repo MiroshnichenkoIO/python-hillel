@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}
+    {{ book.title }}
+{% endblock %}
+{% block content %}
+    <a href="{% url 'shop:book_list' %}">{% trans "До каталогу" %}</a>
+
+    <article class="card">
+        <h2>{{ book.title }}</h2>
+        <p>{% trans "Автор" %}: {{ book.author }}</p>
+        <p>{% trans "Категорія" %}: {{ book.category.name }}</p>
+        <p>{% trans "Ціна" %}: {{ book.price }} {% trans "грн" %}</p>
+        <p>{% trans "Залишок" %}: {{ book.stock }}</p>
+        <p>{{ book.description }}</p>
+    </article>
+
+    {% if book.stock > 0 %}
+        <form method="post" action="{% url 'cart:cart_add' book.pk %}">
+            {% csrf_token %}
+            {{ cart_form }}
+            <button type="submit">{% trans "В кошик" %}</button>
+        </form>
+    {% endif %}
+
+    {% if perms.shop.change_book %}
+        <a href="{% url 'shop:book_update' book.pk %}">{% trans "Змінити" %}</a>
+    {% endif %}
+    {% if perms.shop.delete_book %}
+        <a href="{% url 'shop:book_delete' book.pk %}">{% trans "Видалити" %}</a>
+    {% endif %}
+{% endblock %}
