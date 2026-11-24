@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}
+    {% trans "Кошик" %}
+{% endblock %}
+{% block content %}
+    <h2>{% trans "Кошик" %}</h2>
+
+    {% for item in cart %}
+        <article class="card">
+            <h3>{{ item.book.title }}</h3>
+            <p>{{ item.quantity }} {% trans "шт." %} x {{ item.price }} {% trans "грн" %} = {{ item.total_price }} {% trans "грн" %}</p>
+            <form method="post" action="{% url 'cart:cart_remove' item.book.id %}">
+                {% csrf_token %}
+                <button type="submit">{% trans "Прибрати" %}</button>
+            </form>
+        </article>
+    {% empty %}
+        <p>{% trans "Кошик порожній" %}</p>
+    {% endfor %}
+
+    {% if cart|length > 0 %}
+        <p>{% trans "Разом" %}: {{ cart.get_total_price }} {% trans "грн" %}</p>
+        <form method="post" action="{% url 'cart:cart_clear' %}">
+            {% csrf_token %}
+            <button type="submit">{% trans "Очистити кошик" %}</button>
+        </form>
+        <a href="{% url 'orders:order_create' %}">{% trans "Оформити замовлення" %}</a>
+    {% endif %}
+    <a href="{% url 'shop:book_list' %}">{% trans "До каталогу" %}</a>
+{% endblock %}

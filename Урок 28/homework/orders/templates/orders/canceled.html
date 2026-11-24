@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}
+    {% trans "Оплату скасовано" %}
+{% endblock %}
+{% block content %}
+    <h2>{% trans "Оплату скасовано" %}</h2>
+    <p>{% blocktrans %}{{ order }} не оплачено.{% endblocktrans %}</p>
+    <a href="{% url 'orders:payment_process' order.id %}">{% trans "Спробувати ще раз" %}</a>
+{% endblock %}

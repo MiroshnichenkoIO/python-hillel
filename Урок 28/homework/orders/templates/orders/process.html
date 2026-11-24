@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}
+    {% trans "Оплата" %}
+{% endblock %}
+{% block content %}
+    <h2>{{ order }}</h2>
+
+    {% for item in items %}
+        <p>{{ item.book.title }} - {{ item.quantity }} {% trans "шт." %} - {{ item.get_cost }} {% trans "грн" %}</p>
+    {% endfor %}
+    <p>{% trans "Разом" %}: {{ order.get_total_cost }} {% trans "грн" %}</p>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">{% trans "Оплатити через" %} Stripe</button>
+    </form>
+{% endblock %}

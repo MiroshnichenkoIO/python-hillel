@@ -1,0 +1,395 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-08 11:44+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+#: .\bookshop\settings.py:142
+msgid "Українська"
+msgstr "Ukrainian"
+
+#: .\bookshop\settings.py:143
+msgid "English"
+msgstr "English"
+
+#: .\cart\forms.py:11
+msgid "Кількість"
+msgstr "Quantity"
+
+#: .\cart\templates\cart\detail.html:4 .\cart\templates\cart\detail.html:7
+#: .\templates\base.html:13
+msgid "Кошик"
+msgstr "Cart"
+
+#: .\cart\templates\cart\detail.html:12
+#: .\orders\templates\orders\create.html:10
+#: .\orders\templates\orders\process.html:10
+msgid "шт."
+msgstr "pcs"
+
+#: .\cart\templates\cart\detail.html:12 .\cart\templates\cart\detail.html:23
+#: .\orders\templates\orders\create.html:10
+#: .\orders\templates\orders\create.html:12
+#: .\orders\templates\orders\process.html:10
+#: .\orders\templates\orders\process.html:12
+#: .\shop\templates\shop\book_detail.html:13
+#: .\shop\templates\shop\book_list.html:18
+msgid "грн"
+msgstr "UAH"
+
+#: .\cart\templates\cart\detail.html:15
+msgid "Прибрати"
+msgstr "Remove"
+
+#: .\cart\templates\cart\detail.html:19
+msgid "Кошик порожній"
+msgstr "Your cart is empty"
+
+#: .\cart\templates\cart\detail.html:23
+#: .\orders\templates\orders\create.html:12
+#: .\orders\templates\orders\process.html:12
+msgid "Разом"
+msgstr "Total"
+
+#: .\cart\templates\cart\detail.html:26
+msgid "Очистити кошик"
+msgstr "Clear cart"
+
+#: .\cart\templates\cart\detail.html:28
+msgid "Оформити замовлення"
+msgstr "Checkout"
+
+#: .\cart\templates\cart\detail.html:30
+#: .\orders\templates\orders\completed.html:9
+#: .\shop\templates\shop\book_detail.html:7
+msgid "До каталогу"
+msgstr "Back to catalog"
+
+#: .\orders\forms.py:14
+msgid "Ім'я"
+msgstr "First name"
+
+#: .\orders\forms.py:15
+msgid "Прізвище"
+msgstr "Last name"
+
+#: .\orders\forms.py:17
+msgid "Місто"
+msgstr "City"
+
+#: .\orders\forms.py:18
+msgid "Адреса"
+msgstr "Address"
+
+#: .\orders\models.py:19 .\users\models.py:12
+msgid "користувач"
+msgstr "user"
+
+#: .\orders\models.py:21
+msgid "ім'я"
+msgstr "first name"
+
+#: .\orders\models.py:22
+msgid "прізвище"
+msgstr "last name"
+
+#: .\orders\models.py:23
+msgid "email"
+msgstr "email"
+
+#: .\orders\models.py:24
+msgid "місто"
+msgstr "city"
+
+#: .\orders\models.py:25
+msgid "адреса"
+msgstr "address"
+
+#: .\orders\models.py:26 .\shop\models.py:29
+msgid "створено"
+msgstr "created"
+
+#: .\orders\models.py:27
+msgid "оплачено"
+msgstr "paid"
+
+#: .\orders\models.py:28
+msgid "id у Stripe"
+msgstr "Stripe id"
+
+#: .\orders\models.py:32 .\orders\models.py:33 .\orders\models.py:53
+msgid "замовлення"
+msgstr "order"
+
+#: .\orders\models.py:37 .\orders\utils.py:23
+#, python-format
+msgid "Замовлення №%(id)s"
+msgstr "Order #%(id)s"
+
+#: .\orders\models.py:59 .\shop\models.py:38
+msgid "книга"
+msgstr "book"
+
+#: .\orders\models.py:61 .\shop\models.py:26
+msgid "ціна"
+msgstr "price"
+
+#: .\orders\models.py:62
+msgid "кількість"
+msgstr "quantity"
+
+#: .\orders\models.py:65
+msgid "рядок замовлення"
+msgstr "order item"
+
+#: .\orders\models.py:66
+msgid "рядки замовлення"
+msgstr "order items"
+
+#: .\orders\templates\orders\canceled.html:4
+#: .\orders\templates\orders\canceled.html:7
+msgid "Оплату скасовано"
+msgstr "Payment canceled"
+
+#: .\orders\templates\orders\canceled.html:8
+#, python-format
+msgid "%(order)s не оплачено."
+msgstr "%(order)s is not paid."
+
+#: .\orders\templates\orders\canceled.html:9
+msgid "Спробувати ще раз"
+msgstr "Try again"
+
+#: .\orders\templates\orders\completed.html:4
+msgid "Оплачено"
+msgstr "Paid"
+
+#: .\orders\templates\orders\completed.html:7
+msgid "Дякуємо за оплату!"
+msgstr "Thank you for your payment!"
+
+#: .\orders\templates\orders\completed.html:8
+#, python-format
+msgid "%(order)s на суму %(total)s грн."
+msgstr "%(order)s, total %(total)s UAH."
+
+#: .\orders\templates\orders\create.html:4
+#: .\orders\templates\orders\create.html:7
+msgid "Оформлення замовлення"
+msgstr "Checkout"
+
+#: .\orders\templates\orders\create.html:17
+msgid "Замовити"
+msgstr "Place order"
+
+#: .\orders\templates\orders\payment_error.html:4
+#: .\orders\templates\orders\payment_error.html:7
+msgid "Помилка оплати"
+msgstr "Payment error"
+
+#: .\orders\templates\orders\payment_error.html:9
+msgid "До кошика"
+msgstr "Back to cart"
+
+#: .\orders\templates\orders\process.html:4
+msgid "Оплата"
+msgstr "Payment"
+
+#: .\orders\templates\orders\process.html:16
+msgid "Оплатити через"
+msgstr "Pay with"
+
+#: .\orders\utils.py:11
+#, python-format
+msgid ""
+"Вітаємо, %(name)s!\n"
+"\n"
+"Ваше замовлення №%(id)s створено.\n"
+"Сума: %(total)s грн.\n"
+"Адреса: %(city)s, %(address)s"
+msgstr ""
+"Hello, %(name)s!\n"
+"\n"
+"Your order #%(id)s has been created.\n"
+"Total: %(total)s UAH.\n"
+"Address: %(city)s, %(address)s"
+
+#: .\orders\views.py:54
+#, python-format
+msgid "Недостатньо на складі: %(title)s"
+msgstr "Not enough in stock: %(title)s"
+
+#: .\orders\views.py:146
+msgid "Потрібно увійти"
+msgstr "Login required"
+
+#: .\shop\models.py:9 .\shop\models.py:24
+msgid "назва"
+msgstr "name"
+
+#: .\shop\models.py:10
+msgid "слаг"
+msgstr "slug"
+
+#: .\shop\models.py:13 .\shop\models.py:34
+msgid "категорія"
+msgstr "category"
+
+#: .\shop\models.py:14
+msgid "категорії"
+msgstr "categories"
+
+#: .\shop\models.py:25
+msgid "автор"
+msgstr "author"
+
+#: .\shop\models.py:27
+msgid "опис"
+msgstr "description"
+
+#: .\shop\models.py:28
+msgid "залишок"
+msgstr "stock"
+
+#: .\shop\models.py:39
+msgid "книги"
+msgstr "books"
+
+#: .\shop\templates\shop\book_confirm_delete.html:4
+#, python-format
+msgid "Видалити %(title)s?"
+msgstr "Delete %(title)s?"
+
+#: .\shop\templates\shop\book_confirm_delete.html:8
+msgid "Так, видалити"
+msgstr "Yes, delete"
+
+#: .\shop\templates\shop\book_detail.html:11
+msgid "Автор"
+msgstr "Author"
+
+#: .\shop\templates\shop\book_detail.html:12
+msgid "Категорія"
+msgstr "Category"
+
+#: .\shop\templates\shop\book_detail.html:13
+msgid "Ціна"
+msgstr "Price"
+
+#: .\shop\templates\shop\book_detail.html:14
+msgid "Залишок"
+msgstr "In stock"
+
+#: .\shop\templates\shop\book_detail.html:22
+msgid "В кошик"
+msgstr "Add to cart"
+
+#: .\shop\templates\shop\book_detail.html:27
+msgid "Змінити"
+msgstr "Edit"
+
+#: .\shop\templates\shop\book_detail.html:30
+msgid "Видалити"
+msgstr "Delete"
+
+#: .\shop\templates\shop\book_form.html:4
+msgid "Книга"
+msgstr "Book"
+
+#: .\shop\templates\shop\book_form.html:9
+msgid "Зберегти"
+msgstr "Save"
+
+#: .\shop\templates\shop\book_list.html:4
+#: .\shop\templates\shop\book_list.html:7
+msgid "Каталог книг"
+msgstr "Book catalog"
+
+#: .\shop\templates\shop\book_list.html:10
+msgid "Пошук книги..."
+msgstr "Search for a book..."
+
+#: .\shop\templates\shop\book_list.html:11
+msgid "Знайти"
+msgstr "Search"
+
+#: .\shop\templates\shop\book_list.html:13
+msgid "Знайдено книг"
+msgstr "Books found"
+
+#: .\shop\templates\shop\book_list.html:21
+msgid "Книг не знайдено"
+msgstr "No books found"
+
+#: .\shop\templates\shop\book_list.html:26
+msgid "Попередня сторінка"
+msgstr "Previous page"
+
+#: .\shop\templates\shop\book_list.html:28
+#, python-format
+msgid "Сторінка %(number)s з %(total)s"
+msgstr "Page %(number)s of %(total)s"
+
+#: .\shop\templates\shop\book_list.html:30
+msgid "Наступна сторінка"
+msgstr "Next page"
+
+#: .\shop\views.py:115
+msgid "Книгу не знайдено"
+msgstr "Book not found"
+
+#: .\shop\views.py:139
+msgid "Статистика магазину"
+msgstr "Shop statistics"
+
+#: .\templates\base.html:6 .\templates\base.html:11
+msgid "Книжковий магазин"
+msgstr "Bookshop"
+
+#: .\templates\base.html:15
+msgid "Додати книгу"
+msgstr "Add book"
+
+#: .\templates\base.html:21
+msgid "Вийти"
+msgstr "Log out"
+
+#: .\templates\base.html:24 .\templates\registration\login.html:10
+msgid "Увійти"
+msgstr "Log in"
+
+#: .\templates\base.html:25 .\templates\registration\signup.html:4
+msgid "Реєстрація"
+msgstr "Sign up"
+
+#: .\templates\base.html:36
+msgid "Змінити мову"
+msgstr "Change language"
+
+#: .\templates\registration\login.html:4
+msgid "Вхід"
+msgstr "Login"
+
+#: .\templates\registration\signup.html:9
+msgid "Зареєструватися"
+msgstr "Sign up"
+
+#: .\users\models.py:9
+msgid "телефон"
+msgstr "phone"
+
+#: .\users\models.py:13
+msgid "користувачі"
+msgstr "users"

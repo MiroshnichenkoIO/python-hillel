@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}
+    {% trans "Оплачено" %}
+{% endblock %}
+{% block content %}
+    <h2>{% trans "Дякуємо за оплату!" %}</h2>
+    <p>{% blocktrans with total=order.get_total_cost %}{{ order }} на суму {{ total }} грн.{% endblocktrans %}</p>
+    <a href="{% url 'shop:book_list' %}">{% trans "До каталогу" %}</a>
+{% endblock %}
